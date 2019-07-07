@@ -1,4 +1,3 @@
-#language: minimal
 language: bash
 
 dist: bionic
@@ -6,15 +5,18 @@ dist: bionic
 services:
   - docker
 
-env:
-  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=2.0
-  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=1.9
-  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=1.8
+#env:
+#  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=2.0
 
 before_install:
   - sudo apt-get update && sudo apt-get -y install bats
 
 install:
+  - export UBUNTU_DOCKER_IMAGE=ubuntu:18.04
+  - export HAPROXY_MAIN_VERSION=2.0
+  - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+  - git fetch
+  - git checkout master
   - cd dockerfiles/apache && make build-without-cache && cd ../../
   - cd dockerfiles/haproxy && make build-without-cache && cd ../../
 
