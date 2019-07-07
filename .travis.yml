@@ -15,9 +15,7 @@ install:
   - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
   #- export HAPROXY_MAIN_VERSION=2.0
   - |-
-    curl -s -H 'Accept: application/json' 'https://launchpad.net/api/1.0/~vbernat/ppas' | jq -r '.entries[].name' | sort --version-sort | tail -n 1
-  - |-
-    LATEST_PPA_REPO=$(curl -s -H 'Accept: application/json' 'https://launchpad.net/api/1.0/~vbernat/ppas' | jq -r '.entries[].name' | sort --version-sort | tail -n 1)
+    LATEST_PPA_REPO=$(curl -s -H 'Accept: application/json' 'https://launchpad.net/api/1.0/~vbernat/ppas' | jq -r '.entries[].name' | sort --version-sort | tail -n 1 | cut -d'-' -f2)
   - export HAPROXY_MAIN_VERSION=$LATEST_PPA_REPO
   - echo $HAPROXY_MAIN_VERSION
   - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
