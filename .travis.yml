@@ -12,8 +12,10 @@ before_install:
   - sudo apt-get update && sudo apt-get -y install bats
 
 install:
-  - export UBUNTU_DOCKER_IMAGE=ubuntu:18.04
-  - export HAPROXY_MAIN_VERSION=2.0
+  - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
+  #- export HAPROXY_MAIN_VERSION=2.0
+  - LATEST_PPA_REPO=$(curl -s -H "Accept: application/json" https://launchpad.net/api/1.0/~vbernat/ppas | jq -r '.entries[].name' | sort --version-sort | tail -n 1)
+  - export HAPROXY_MAIN_VERSION=$LATEST_PPA_REPO=
   - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
   - git fetch
   - git checkout master
