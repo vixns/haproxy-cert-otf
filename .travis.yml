@@ -1,0 +1,28 @@
+language: bash
+
+dist: bionic
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update && sudo apt-get -y install bats
+
+install:
+  - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
+  - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+  - git fetch
+  - git checkout master
+  - cd dockerfiles/apache && make build-without-cache && cd ../../
+  - cd dockerfiles/haproxy && ./edit-dockerfile.sh insert_content02 Dockerfile > Dockerfile.tmp && mv -f Dockerfile.tmp Dockerfile && make build-without-cache && cd ../../
+
+script:
+  - make test
+
+after_script:
+  - make clean
+
+notifications:
+  email:
+    - haproxy.cert.otf.travis@gmail.com
+
