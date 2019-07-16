@@ -5,24 +5,17 @@ dist: bionic
 services:
   - docker
 
-#env:
-#  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=2.0
-
 before_install:
   - sudo apt-get update && sudo apt-get -y install bats
 
 install:
   - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
-  #- export HAPROXY_MAIN_VERSION=2.0
-  - |-
-    LATEST_PPA_REPO=$(curl -s -H 'Accept: application/json' 'https://launchpad.net/api/1.0/~vbernat/ppas' | jq -r '.entries[].name' | sort --version-sort | tail -n 1 | cut -d'-' -f2)
-  - export HAPROXY_MAIN_VERSION=$LATEST_PPA_REPO
-  - echo $HAPROXY_MAIN_VERSION
   - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
   - git fetch
   - git checkout master
   - cd dockerfiles/apache && make build-without-cache && cd ../../
-  - cd dockerfiles/haproxy && make build-without-cache && cd ../../
+  - cd dockerfiles/haproxy && ./edit-dockerfile.sh insert_content01 Dockerfile > Dockerfile.tmp && mv -f Dockerfile.tmp Dockerfile && make build-without-cache && cd ../../
+  #- cd dockerfiles/haproxy && make build-without-cache && cd ../../
 
 #before_script:
 #  - 
