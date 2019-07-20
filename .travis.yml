@@ -18,9 +18,6 @@ install:
   - cd dockerfiles/haproxy && ./edit-dockerfile.sh insert_content01 Dockerfile > Dockerfile.tmp && mv -f Dockerfile.tmp Dockerfile && make build-without-cache && cd ../../
   #- cd dockerfiles/haproxy && make build-without-cache && cd ../../
 
-#before_script:
-#  - 
-
 script:
   - make test
 
