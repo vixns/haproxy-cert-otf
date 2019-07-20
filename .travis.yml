@@ -5,11 +5,9 @@ dist: bionic
 services:
   - docker
 
-#env:
-#  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=2.0
-
 before_install:
-  - sudo apt-get update && sudo apt-get -y install bats
+  - travis_retry sudo apt-get update
+  - travis_retry sudo apt-get -y install bats
 
 install:
   - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
@@ -23,9 +21,6 @@ install:
   - git checkout master
   - cd dockerfiles/apache && make build-without-cache && cd ../../
   - cd dockerfiles/haproxy && make build-without-cache && cd ../../
-
-#before_script:
-#  - 
 
 script:
   - make test
