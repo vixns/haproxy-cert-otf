@@ -6,7 +6,8 @@ services:
   - docker
 
 before_install:
-  - sudo apt-get update && sudo apt-get -y install bats
+  - travis_retry sudo apt-get update
+  - travis_retry sudo apt-get -y install bats
 
 install:
   - export UBUNTU_DOCKER_IMAGE=ubuntu:latest
