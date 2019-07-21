@@ -19,8 +19,12 @@ install:
   - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
   - git fetch
   - git checkout master
-  - cd dockerfiles/apache && make build-without-cache && cd ../../
-  - cd dockerfiles/haproxy && make build-without-cache && cd ../../
+  - cd dockerfiles/apache
+  - travis_retry make build-without-cache
+  - cd "$TRAVIS_BUILD_DIR"
+  - cd dockerfiles/haproxy
+  - travis_retry make build-without-cache
+  - cd "$TRAVIS_BUILD_DIR"
 
 script:
   - make test
