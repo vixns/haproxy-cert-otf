@@ -8,6 +8,7 @@ services:
 before_install:
   - sudo cat /etc/apt/sources.list
   - sudo ls /etc/apt/sources.list.d/
+  - sudo cat /etc/apt/sources.list.d/pgdg.list
   - travis_retry sudo apt-get update
   - travis_retry sudo apt-get -y install bats
 
