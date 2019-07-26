@@ -6,6 +6,7 @@ services:
   - docker
 
 before_install:
+  - sudo rm -f /etc/apt/sources.list.d/pgdg.list
   - travis_retry sudo apt-get update
   - travis_retry sudo apt-get -y install bats
 
