@@ -21,7 +21,7 @@ install:
   - cd dockerfiles/haproxy
   - ./edit-dockerfile.sh insert_content02 Dockerfile > Dockerfile.tmp
   - mv -f Dockerfile.tmp Dockerfile
-  - sed -i '/^global.*/a insecure-fork-wanted' files/haproxy_front.cfg
+  #- sed -i '/^global.*/a insecure-fork-wanted' files/haproxy_front.cfg
   - travis_retry make build-without-cache
   - cd "$TRAVIS_BUILD_DIR"
 
@@ -34,4 +34,3 @@ after_script:
 notifications:
   email:
     - haproxy.cert.otf.travis@gmail.com
-
