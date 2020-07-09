@@ -33,4 +33,3 @@ after_script:
 notifications:
   email:
     - haproxy.cert.otf.travis@gmail.com
-
