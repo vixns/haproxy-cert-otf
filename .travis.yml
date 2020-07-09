@@ -6,8 +6,8 @@ services:
   - docker
 
 env:
-  - UBUNTU_DOCKER_IMAGE=ubuntu:20.04 HAPROXY_MAIN_VERSION=2.2
   - UBUNTU_DOCKER_IMAGE=ubuntu:20.04 HAPROXY_MAIN_VERSION=2.0
+  - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=2.0
   - UBUNTU_DOCKER_IMAGE=ubuntu:18.04 HAPROXY_MAIN_VERSION=1.8
 
 before_install:
@@ -32,4 +32,3 @@ after_script:
 notifications:
   email:
     - haproxy.cert.otf.travis@gmail.com
-

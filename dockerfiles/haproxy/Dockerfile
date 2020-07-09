@@ -47,6 +47,4 @@ RUN update-ca-certificates
 # Info
 RUN haproxy -vv
 
-
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
-
